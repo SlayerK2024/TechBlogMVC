@@ -1,0 +1,22 @@
+{{#extends 'main'}}
+{{#block 'title'}}Dashboard{{/block}}
+
+{{#block 'body'}}
+  <h1>Your Dashboard</h1>
+  <a href="/post/new">Create New Post</a>
+  {{#if userPosts.length}}
+    <ul>
+      {{#each userPosts}}
+        <li>
+          <a href="/post/{{this.id}}">{{this.title}}</a>
+          <a href="/post/{{this.id}}/edit">Edit</a>
+          <form action="/post/{{this.id}}" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No posts yet.</p>
+  {{/if}}
+{{/block}}
