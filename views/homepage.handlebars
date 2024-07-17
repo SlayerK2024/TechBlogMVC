@@ -1,20 +1,16 @@
-<div class="container mt-4">
-  <div class="row">
-    {{#each posts}}
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img src="{{imageUrl}}" class="card-img-top" alt="Post Image" />
-          <div class="card-body">
-            <h5 class="card-title">{{title}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">By {{user.name}}</h6>
-            <p class="card-text">{{shortenContent content}}</p>
-            <a href="/post/{{id}}" class="btn btn-primary">Read More</a>
-          </div>
-          <div class="card-footer text-muted">
-            Posted on {{formatDate createdAt}}
-          </div>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-</div>
+{{title}}
+{{#extends 'main'}}
+{{#block 'title'}}Homepage{{/block}}
+
+{{#block 'body'}}
+  <h1>Welcome to the Blog</h1>
+  {{#if posts.length}}
+    <ul>
+      {{#each posts}}
+        <li><a href="/post/{{this.id}}">{{this.title}}</a> - {{this.createdAt}}</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No posts available</p>
+  {{/if}}
+{{/block}}
