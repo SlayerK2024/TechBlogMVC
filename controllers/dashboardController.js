@@ -1,4 +1,4 @@
-const { BlogPost } = require('../models');
+const { BlogPosts } = require('../models');
 
 exports.getDashboard = async (req, res) => {
   try {
