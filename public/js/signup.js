@@ -1,25 +1,39 @@
-const formEl = document.querySelector('form');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('signup-form');
 
-formEl.addEventListener('submit', async (e) => {
-	e.preventDefault();
-	console.log(e);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the default form submission
 
-	const data = new FormData(formEl);
-	const newUser = {};
-	for (const [key, value] of data) {
-		newUser[key] = value;
-	}
+    // Get form data
+    const formData = new FormData(form);
 
-	const response = await fetch('/api/user', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(newUser)
-	});
-	if (response.ok) {
-		window.location.href = '/';
-	} else {
-		alert(response.statusText);
-	}
+    // Prepare data for submission
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      name: formData.get('name')
+    };
+
+    // Send data to the server
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Signup successful!');
+        window.location.href = '/login'; // Redirect to login or other page
+      } else {
+        alert('Signup failed: ' + data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred during signup.');
+    });
+  });
 });
