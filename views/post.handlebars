@@ -1,0 +1,24 @@
+{{#extends 'main'}}
+{{#block 'title'}}{{post.title}}{{/block}}
+
+{{#block 'body'}}
+  <h1>{{post.title}}</h1>
+  <p>Posted by {{post.user.username}} on {{post.createdAt}}</p>
+  <p>{{post.content}}</p>
+
+  <h3>Comments</h3>
+  {{#each post.comments}}
+    <div>
+      <p>{{this.content}} - {{this.user.username}} on {{this.createdAt}}</p>
+    </div>
+  {{/each}}
+
+  {{#if user_id}}
+    <form action="/post/{{post.id}}/comment" method="POST">
+      <textarea name="content" required></textarea>
+      <button type="submit">Submit Comment</button>
+    </form>
+  {{else}}
+    <p>Please <a href="/login">log in</a> to leave a comment.</p>
+  {{/if}}
+{{/block}}
