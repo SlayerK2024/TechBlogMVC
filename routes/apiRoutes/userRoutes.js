@@ -4,7 +4,7 @@ const { withAuth } = require('../../utils/Auth');
 const router = require('express').Router();
 
 router.route('/').post(userController.add).get(withAuth, userController.me);
-
+router.post('/signup', userController.signup);
 router.route('/login').post(userController.login);
 router.route('/logout').get(userController.logout);
 
