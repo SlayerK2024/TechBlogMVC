@@ -11,6 +11,9 @@ module.exports = {
 			res.json({ user: userData, message: 'You are now logged in!' });
 		});
 	},
+	signup: async (req, res) => {
+		res.render('signup');
+	},
 	login: async (req, res) => {
 		try {
 			// Find the user who matches the posted e-mail address

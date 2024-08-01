@@ -1,5 +1,5 @@
 const blogController = require('../../controllers/blogController');
-const commentController = require('../controllers/commentController');
+const commentController = require('../../controllers/commentController');
 const { withAuth } = require('../../utils/Auth');
 
 const router = require('express').Router();

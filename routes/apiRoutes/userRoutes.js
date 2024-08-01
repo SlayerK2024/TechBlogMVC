@@ -1,9 +1,15 @@
+// routes/apiRoutes/userRoutes.js
+const express = require('express');
 const userController = require('../../controllers/userController');
 const { withAuth } = require('../../utils/Auth');
 
-const router = require('express').Router();
+const router = express.Router();
 
-router.route('/').post(userController.add).get(withAuth, userController.me);
+// Define routes
+router.route('/')
+  .post(userController.add)
+  .get(withAuth, userController.me);
+
 router.post('/signup', userController.signup);
 router.route('/login').post(userController.login);
 router.route('/logout').get(userController.logout);
